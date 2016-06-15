@@ -688,7 +688,45 @@ news | array | See [Team News](#team-news-data) for response object definition.
 
 ## Previews Data
 
-TODO
+```shell
+curl -X POST -d \
+     'user_token=d5be71fe-96dd-4af1-95e3-77e49face214' \
+     https://txodds.com/api/previews
+```
+
+```java
+
+```
+
+```ObjectiveC
+
+```
+
+```javascript
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+   {
+      "body":"<p>Lionel Messi has just returned to training, training with the ball and there is a chance that he will play against Chile. It is up to Messi himself, according to their coach. Messi has endured back problems and he is tired after some hectic travelling lately.  As the other two teams in this group are Bolivia and Panama this game between the Copa America finalists last time around is not that important. L Biglia will miss this game and N Gaitan is the one likely to replace Messi, if necessary. Over the years it has become quite clear that Messi does not reach the same heights playing for Argentina,  as he does playing for Barcelona.</p><p>M Fernandez is injured and he has been replaced by M Gonzalez in the Chilean squad. Key players as always for Chile are of course A Sanchez and A Vidal.</p><p>G Higuain, Kun Aguero, Di Maria, yes,  Argentina have some outstanding offensive players in their team even without L Messi and their midfield line is also top class with E Banega, Mascherano and J Pastore likely starters.</p><p>I would back the Argentinian win.</p>",
+      "updated":1465201480.0,
+      "event_date":1465264800.0,
+      "match_link":"https://txodds.com/odds+comparison/html?peid=3530854",
+      "id":29397,
+      "description":"Preview for Argentina v Chile",
+      "league":"FBINT Copa America-16",
+      "title":"Argentina v Chile",
+      "url":"https://txodds.com/match-info/29397/argentina-v-chile",
+      "created":1465201480.0,
+      "created_by":"jamespunt"
+   }
+]
+```
+
+This endpoint is used to load all event Preview reports. When a user refreshes the previews content list on their app it is recommended that this endpoint be called with the highest received preview identity to receive only new content.
 
 ### HTTP Request
 
@@ -699,8 +737,11 @@ TODO
 Parameter | Type | Required | Description
 --------- | ---- | -------- | -----------
 user_token | string | true | The user session token.
+last_event_id | integer | false | If provided only new data created after this identity will be returned.
 
 ### Response Parameters
+
+The response object contains an array of the following data structure:
 
 Parameter | Type | Description
 --------- | ---- | -----------
@@ -719,7 +760,45 @@ updated | long | Epoch date for when the preview was last updated.
 
 ## OCI Reports Data
 
-TODO
+```shell
+curl -X POST -d \
+     'user_token=d5be71fe-96dd-4af1-95e3-77e49face214' \
+     https://txodds.com/api/moves
+```
+
+```java
+
+```
+
+```ObjectiveC
+
+```
+
+```javascript
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+   {
+      "body":"<h2><strong>OCI Report</strong></h2><p><strong>Market Move on Panama ( 137.75% OCI )</strong></p><p><strong><em>Reason: &nbsp;QUALITY / TEAM NEWS</em></strong></p><p><strong>Panama</strong> are a defensive side and don't concede many goals. And held their won against bigger teams Brazil, Mexico and Uruguay in the last year. They are missing Torres (df 98/8).</p><p><strong>Bolivia</strong> look very poor and have lost 9 of their last 10 games! They are also missing key players and their top scorer. Bolivia without Vaca (gk 14/0), Morales (df 10/0), Cardoza (mf 37/5), Chumacero (mf 31/2), Bejarano (mf 16/0), Pedriel (att 20/3) and Moreno (att 54/14 top scorer).</p><p><strong><em>Panama 1.72 &nbsp;Draw 3.39 &nbsp;Bolivia 5.47</em></strong></p><p><a href=\"https://txodds.com/odds+comparison/html?peid=3530853&ot=0\">https://txodds.com/odds+comparison/html?peid=35308...</a></p>",
+      "updated":1465202850.0,
+      "event_date":1465254000.0,
+      "match_link":"https://txodds.com/odds+comparison/html?peid=3530853",
+      "id":29398,
+      "description":"OCI Report for Panama v Bolivia",
+      "league":"Copa America",
+      "title":"Panama v Bolivia",
+      "url":"https://txodds.com/match-info/29398/panama-v-bolivia",
+      "created":1465202850.0,
+      "created_by":"kellyeden"
+   }
+]
+```
+
+This endpoint is used to load all event OCI Reports reports. When a user refreshes the OCI Reports content list on their app it is recommended that this endpoint be called with the highest received OCI Report identity to receive only new content.
 
 ### HTTP Request
 
@@ -730,6 +809,7 @@ TODO
 Parameter | Type | Required | Description
 --------- | ---- | -------- | -----------
 user_token | string | true | The user session token.
+last_event_id | integer | false | If provided only new data created after this identity will be returned.
 
 ### Response Parameters
 
@@ -749,17 +829,56 @@ updated | long | Epoch date for when the OCI Report was last updated.
 
 ## Team News Data
 
-TODO
+```shell
+curl -X POST -d \
+     'user_token=d5be71fe-96dd-4af1-95e3-77e49face214' \
+     https://txodds.com/api/moves
+```
+
+```java
+
+```
+
+```ObjectiveC
+
+```
+
+```javascript
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+   {
+      "body":"<h2><strong>Market Information</strong></h2><p><strong>France</strong>&nbsp;missing Varane (df 29/2), Sakho (df 28/2), Debuchy (df 27/2), Diarra (mf 34/0), Valbuena (mf 52/8), Lacazette (att 10/1), Gameiro (att 8/1) and Benzema (att 81/27 top scorer).</p><p><strong>Romania</strong>&nbsp;are without Papp (df 18/3), Goian (df 59/5), Tamas (df 65/3), Gardos (df 13/0), Maxim (mf 28/2) and Rusescu (att 10/1).</p><p><strong><em>Possible Line-ups:</em></strong></p><p><strong>France:</strong> Lloris, Sagna, Rami, Koscielny, Evra, Pogba, Kante, Matuidi, Payet, Griezmann, Giroud.</p><p><strong>Romania:&nbsp;</strong>Tatarusanu, Sapunaru, Chiriches, Grigore, Rat, Pintilii, Hoban, Popa, Stanciu, Stancu, Andone.</p><p><strong><em>Info: &nbsp;</em></strong>France are unbeaten in their last 10 games against Romania (W5, D5). However, four of their last five encounters have ended in draws.&nbsp;Romania's last victory against France was a 2-0 friendly win in Bucharest in April 1972.&nbsp;Romania have kept a clean sheet in 7 of their last 8 matches</p><p><strong><em><br></em></strong></p><p><strong><em>France 1.33 &nbsp;Draw 4.81 &nbsp;Romania 10.73</em></strong></p><p><a href=\"https://txodds.com/odds+comparison/html?peid=3453592\">https://txodds.com/odds+comparison/html?peid=34535...</a></p>",
+      "updated":1465538977.0,
+      "event_date":1465585200.0,
+      "match_link":"https://txodds.com/odds+comparison/html?peid=3453592",
+      "id":29423,
+      "description":"Team News for France v Romania",
+      "league":"Euro 2016 - Group A",
+      "title":"France v Romania",
+      "url":"https://txodds.com/match-info/29423/france-v-romania",
+      "created":1465538977.0,
+      "created_by":"kellyeden"
+   }
+]
+```
+
+This endpoint is used to load all event Team News Reports reports. When a user refreshes the Team News Reports content list on their app it is recommended that this endpoint be called with the highest received Team News Report identity to receive only new content.
 
 ### HTTP Request
 
-`POST https://txodds.com/api/moves`
+`POST https://txodds.com/api/news`
 
 ### URL Parameters
 
 Parameter | Type | Required | Description
 --------- | ---- | -------- | -----------
 user_token | string | true | The user session token.
+last_event_id | integer | false | If provided only new data created after this identity will be returned.
 
 ### Response Parameters
 
