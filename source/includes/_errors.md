@@ -1,20 +1,42 @@
 # Errors
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+Included in each response is the following data structure which should contain a friendly error string as well as a unique error code:
 
-The Kittn API uses the following error codes:
+```json
+{
+   "resp_status":{
+   "message":"OK",
+   "code":0,
+   "errors":null
+   }
+}
+```
 
+The TXODDS Mobile API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
+0000 | 'OK'
+0001 | 'Invalid session'
+1001 | 'Authentication Failed'
+1002 | 'Login not provided'
+1003 | 'Password not provided'
+1004 | 'Invalid login and password'
+1005 | 'No valid subscriptions'
+1006 | 'User token not provided'
+1007 | 'Invalid user token'
+1008 | 'Field not provided'
+1009 | 'Invalid device type'
+1010 | 'Syntax error'
+1011 | 'Email address not provided'
+1012 | 'Registration failed'
+1013 | 'First name not provided'
+1014 | 'Last name not provided'
+1015 | 'Login name is not available'
+1016 | 'Email address is already in use'
+1017 | 'Unique device Id not provided'
+1018 | 'Too many registered devices'
+1019 | 'No profile Id was provided'
+1020 | 'Invalid profile Id'
+1021 | 'Device type not provided'
+9000 | 'Unknown error'
