@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>TXODDS Mobile API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;java&quot;,&quot;ObjectiveC&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,8 +102,9 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="java">java</a>
+              <a href="#" data-language-name="ObjectiveC">ObjectiveC</a>
+              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,7 +113,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://txodds.com/registers'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -121,167 +122,1359 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the TXODDS Mobile API! You can use this API to access our unique match information data including Previews, OCI Reports and Team News.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>API endpoints include support for authentication; new account registration; loading user information and updating user preferences.</p>
 
 <h1 id="authentication">Authentication</h1>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<h2 id="login">Login</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'login=demo-user&amp;password=opensesame&amp;device_id=device-123&amp;device_type=ios'</span> <span class="se">\</span>
+     https://txodds.com/api/login
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<pre class="highlight java"><code>
 </code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight plaintext"><code>
 </code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight javascript"><code>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+   </span><span class="nt">"resp_status"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"user_details"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"demo-user"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"demo-user@txodds.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country"</span><span class="p">:</span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"TRADER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expiry"</span><span class="p">:</span><span class="mf">1502535462.0</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"user_token"</span><span class="p">:</span><span class="s2">"1234abcd-1234-abcd-1234-1234abcd1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"permissions"</span><span class="p">:[</span><span class="w">
+         </span><span class="s2">"g:pro"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"g:moves"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"settings"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"notifications"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"language"</span><span class="p">:</span><span class="s2">"en"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"profile_url"</span><span class="p">:</span><span class="s2">"http://txodds.com/profiles/demo-user"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint authenticates an existing user and returns all account information. </p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<p>Each user is only permitted to have 2 active registered devices for TXODDS mobile applications, this requires that when a login request is made the unique device Id of the user&rsquo;s handset is submitted.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">POST https://txodds.com/api/login</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>login</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s unique login name.</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s password</td>
+<td></td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>string</td>
+<td>true</td>
+<td>The unique device Id that the user is using.</td>
+<td></td>
+</tr>
+<tr>
+<td>device_type</td>
+<td>string</td>
+<td>true</td>
+<td>The device operating system.</td>
+<td>android, ios</td>
+</tr>
+<tr>
+<td>language</td>
+<td>string</td>
+<td>false</td>
+<td>The language to choose upon login.</td>
+<td>en, it, zh</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Remember — a user may only have 2 active registered devices. Do deactivate a device the user must log into their profile on the website https://txodds.com/
+</aside>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<p>The following response parameters are contained within the <strong>user_details</strong> response object:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>login</td>
+<td>string</td>
+<td>The user&rsquo;s unique login name.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>The user&rsquo;s default email address.</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>string</td>
+<td>The user&rsquo;s first name.</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>string</td>
+<td>The user&rsquo;s surname.</td>
+</tr>
+<tr>
+<td>locale</td>
+<td>string</td>
+<td>2 character string of the user&rsquo;s website locale, if user settings is empty this can be used to default the app language.</td>
+</tr>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>The users&rsquo;s session token, this is required for all other endpoints.</td>
+</tr>
+<tr>
+<td>country</td>
+<td>string</td>
+<td>2 character code representing the user&rsquo;s country.</td>
+</tr>
+<tr>
+<td>profile_url</td>
+<td>string</td>
+<td>Website URL to the user&rsquo;s profile page.</td>
+</tr>
+<tr>
+<td>permissions</td>
+<td>array</td>
+<td><em>Deprecated, please ignore</em></td>
+</tr>
+<tr>
+<td>settings</td>
+<td>array</td>
+<td>Key/Value pairs for user&rsquo;s app settings.  <em>language</em> defines the app language to use. <em>notifications</em> defines whether the user should receive push messages.</td>
+</tr>
+<tr>
+<td>subscriptions</td>
+<td>array</td>
+<td>List of users&rsquo;s subscriptions. If the user has <strong>TRADER</strong> they will be able to access OCI Reports &amp; News. The API will not return this content if they do not have the correct permission.</td>
+</tr>
+</tbody></table>
+
+<h2 id="register">Register</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'login=demo-user&amp;email=demo-user@txodds.com&amp;firstname=Demo&amp;lastname=User&amp;password=opensesame&amp;device_id=device-123&amp;device_type=ios'</span> <span class="se">\</span>
+     https://txodds.com/api/register
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"resp_status"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"user_details"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"demo-user"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"demo-user@txodds.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country"</span><span class="p">:</span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"TRADER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expiry"</span><span class="p">:</span><span class="mf">1502535462.0</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"user_token"</span><span class="p">:</span><span class="s2">"1234abcd-1234-abcd-1234-1234abcd1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"permissions"</span><span class="p">:[</span><span class="w">
+         </span><span class="s2">"g:pro"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"g:moves"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"settings"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"notifications"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"language"</span><span class="p">:</span><span class="s2">"en"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"profile_url"</span><span class="p">:</span><span class="s2">"http://txodds.com/profiles/demo-user"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint will create a new user account at TXODDS. The user will be able to use this account to access all of TXODDS services.</p>
+
+<aside class="notice">TXODDS users various product subscriptions to control access to certain data and products. By default a new user account without a subscription will be able to access the mobile app but will only have access to Previews data.</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/register</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>login</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s unique login name.</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s email address</td>
+<td></td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s first name</td>
+<td></td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s last name or surname</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>true</td>
+<td>The user&rsquo;s password</td>
+<td></td>
+</tr>
+<tr>
+<td>tel</td>
+<td>string</td>
+<td>false</td>
+<td>The user&rsquo;s telephone number</td>
+<td></td>
+</tr>
+<tr>
+<td>country</td>
+<td>string</td>
+<td>false</td>
+<td>2 letter country code</td>
+<td></td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>string</td>
+<td>true</td>
+<td>The unique device Id that the user is using.</td>
+<td></td>
+</tr>
+<tr>
+<td>device_type</td>
+<td>string</td>
+<td>true</td>
+<td>The device operating system.</td>
+<td>android, ios</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<p>See <a href="#login">Login</a> for response paramters. The same are returned for Register.</p>
+
+<h2 id="subscribe-device">Subscribe Device</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=1234abcd-1234-abcd-1234-1234abcd1234&amp;device_token=ABCZXY42492384092&amp;device_id=device-123&amp;device_type=ios'</span> <span class="se">\</span>
+     https://txodds.com/api/subscribe-device
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint will subscribe the user&rsquo;s device for push notifications produced by the server. When new content is created for the app, users can receive notification of this.</p>
+
+<p>It is recommended that this endpoint be called after each user login.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/subscribe-device</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+<td></td>
+</tr>
+<tr>
+<td>device_token</td>
+<td>string</td>
+<td>true</td>
+<td>The device&rsquo;s publish token</td>
+<td></td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>string</td>
+<td>true</td>
+<td>The unique device Id that the user is using.</td>
+<td></td>
+</tr>
+<tr>
+<td>device_type</td>
+<td>string</td>
+<td>true</td>
+<td>The device operating system.</td>
+<td>android, ios</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+You must replace `user_token` with the token value returned from login.
+</aside>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>success</td>
+<td>boolean</td>
+<td>Whether the request was successful.</td>
+</tr>
+</tbody></table>
+
+<h1 id="user-information">User Information</h1>
+
+<h2 id="get-user-details">Get User Details</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=1234abcd-1234-abcd-1234-1234abcd1234'</span> <span class="se">\</span>
+     https://txodds.com/api/get-user-details
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"resp_status"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"user_details"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"demo-user"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"demo-user@txodds.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="s2">"Demo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country"</span><span class="p">:</span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"subscriptions"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"TRADER"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"expiry"</span><span class="p">:</span><span class="mf">1502535462.0</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"user_token"</span><span class="p">:</span><span class="s2">"1234abcd-1234-abcd-1234-1234abcd1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"permissions"</span><span class="p">:[</span><span class="w">
+         </span><span class="s2">"g:pro"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"g:moves"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"settings"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"notifications"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"language"</span><span class="p">:</span><span class="s2">"en"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"profile_url"</span><span class="p">:</span><span class="s2">"http://txodds.com/profiles/demo-user"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint returns the same user details information that is returned after a success login.</p>
+
+<p>Use this endpoint any time that you want to refresh the user&rsquo;s personal information that is held on the device. There are no push notifications for any data changes made on the web or other devices.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/get-user-details</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<p>See <a href="#login">Login</a> for response paramters. The same are returned for Get User Details.</p>
+
+<h2 id="set-user-preferences">Set User Preferences</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=1234abcd-1234-abcd-1234-1234abcd1234&amp;language=en&amp;notifications=true'</span> <span class="se">\</span>
+     https://txodds.com/api/set-preferences
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changed: 2"</span><span class="p">,</span><span class="w"> 
+   </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint is used to update the server database with the user&rsquo;s chosen settings.</p>
+
+<p>Presently this can be used to set the user&rsquo;s chosen language and whether they wish to receive push notifications.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/set-preferences</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+<td></td>
+</tr>
+<tr>
+<td>language</td>
+<td>string</td>
+<td>false</td>
+<td>The user&rsquo;s selected language.</td>
+<td>en, it, zh</td>
+</tr>
+<tr>
+<td>notifications</td>
+<td>boolean</td>
+<td>false</td>
+<td>Whether to receive push notifications</td>
+<td>true, false</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>Whether the request was successful.</td>
+</tr>
+<tr>
+<td>message</td>
+<td>sting</td>
+<td>A message containing the count of setting values that were changed.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-user-profiles">Get User Profiles</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=1234abcd-1234-abcd-1234-1234abcd1234'</span> <span class="se">\</span>
+     https://txodds.com/api/get-user-profiles
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"resp_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"All Bookmakers"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20268</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good books"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20269</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arbs"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20271</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20272</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tennis"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20276</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asian + Totals"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20277</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Italian Books"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint returns all the user&rsquo;s bookmaker profiles. It returns a list of the user&rsquo;s profiles, each that can be loaded in full detail with <a href="#get-user-profile">Get User Profile</a>.</p>
+
+<aside class="notice">This is not used in the Match Information apps. It is provided for the Odds Comparison app.</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/get-user-profiles</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<p>The following response parameters are contained within the <strong>profiles</strong> array response object:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>The profile&rsquo;s unique identifier.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>sting</td>
+<td>The profile&rsquo;s name.</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>boolean</td>
+<td>Whether the profile is presently the one chosen for use by the user.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-user-profile">Get User Profile</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=1234abcd-1234-abcd-1234-1234abcd1234&amp;profile_id=20277'</span> <span class="se">\</span>
+     https://txodds.com/api/get-user-profile
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+ </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"leagues"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nt">"is_active"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sort_order"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"odds_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20277</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vs_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Italian Books"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sports"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nt">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mi">109</span><span class="p">,</span><span class="w">
+            </span><span class="mi">110</span><span class="p">,</span><span class="w">
+            </span><span class="mi">126</span><span class="p">,</span><span class="w">
+            </span><span class="mi">238</span><span class="p">,</span><span class="w">
+            </span><span class="mi">291</span><span class="p">,</span><span class="w">
+            </span><span class="mi">342</span><span class="p">,</span><span class="w">
+            </span><span class="mi">413</span><span class="p">,</span><span class="w">
+            </span><span class="mi">475</span><span class="p">,</span><span class="w">
+            </span><span class="mi">567</span><span class="p">,</span><span class="w">
+            </span><span class="mi">613</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"default_sport"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"default_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"today"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widgets"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nt">"display_format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"euro"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"resp_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint returns the full details of a user&rsquo;s bookmaker profile.</p>
+
+<p>A profile consists of a lists of the following defined information:
+1. Bookmakers data to display
+2. Leagues to display
+3. Sports to display
+4. Odds Types to display
+5. Other display settings such as odds display format</p>
+
+<aside class="notice">This is not used in the Match Information apps. It is provided for the Odds Comparison app.</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/get-user-profile</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+<tr>
+<td>profile_id</td>
+<td>true</td>
+<td>The Id of the user profile to load.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<p>The following response parameters are contained within the <strong>profile</strong> response object:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>The profile&rsquo;s unique identifier.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>sting</td>
+<td>The profile&rsquo;s name.</td>
+</tr>
+<tr>
+<td>is_active</td>
+<td>boolean</td>
+<td>Whether the profile is presently the one chosen for use by the user.</td>
+</tr>
+<tr>
+<td>books</td>
+<td>array</td>
+<td>Integer list of bookmaker identifiers.</td>
+</tr>
+<tr>
+<td>sports</td>
+<td>array</td>
+<td>Integer list of sport identifiers.</td>
+</tr>
+<tr>
+<td>leagues</td>
+<td>array</td>
+<td>Integer list of league identifiers.</td>
+</tr>
+<tr>
+<td>odds_types</td>
+<td>array</td>
+<td>Integer list of odds types identifiers.</td>
+</tr>
+<tr>
+<td>vs_at</td>
+<td>string</td>
+<td>whether events should be display as <strong>vs</strong> format (<em>default</em>), or American Team B at Team A.</td>
+</tr>
+<tr>
+<td>display_format</td>
+<td>string</td>
+<td>Odds display format. <strong>decimal</strong> = 1.20; <strong>euro</strong> = 120; <strong>us</strong> = 500.</td>
+</tr>
+<tr>
+<td>sort_order</td>
+<td>string</td>
+<td>The display order for lists of odds. <strong>odds</strong> = Best odds first; <strong>name</strong> = Bookmaker alphabetical.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">If any of the object identifier arrays are empty, this implies that all values should be used.</aside>
+
+<h1 id="application-data">Application Data</h1>
+
+<h2 id="loading-initial-app-data">Loading Initial App Data</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=d5be71fe-96dd-4af1-95e3-77e49face214'</span> <span class="se">\</span>
+     https://txodds.com/api/initial-data
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"previews"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"&lt;p&gt;Lionel Messi has just returned to training, training with the ball and there is a chance that he will play against Chile. It is up to Messi himself, according to their coach. Messi has endured back problems and he is tired after some hectic travelling lately.  As the other two teams in this group are Bolivia and Panama this game between the Copa America finalists last time around is not that important. L Biglia will miss this game and N Gaitan is the one likely to replace Messi, if necessary. Over the years it has become quite clear that Messi does not reach the same heights playing for Argentina,  as he does playing for Barcelona.&lt;/p&gt;&lt;p&gt;M Fernandez is injured and he has been replaced by M Gonzalez in the Chilean squad. Key players as always for Chile are of course A Sanchez and A Vidal.&lt;/p&gt;&lt;p&gt;G Higuain, Kun Aguero, Di Maria, yes,  Argentina have some outstanding offensive players in their team even without L Messi and their midfield line is also top class with E Banega, Mascherano and J Pastore likely starters.&lt;/p&gt;&lt;p&gt;I would back the Argentinian win.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated"</span><span class="p">:</span><span class="mf">1465201480.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"event_date"</span><span class="p">:</span><span class="mf">1465264800.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"match_link"</span><span class="p">:</span><span class="s2">"https://txodds.com/odds+comparison/html?peid=3530854"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">29397</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Preview for Argentina v Chile"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"league"</span><span class="p">:</span><span class="s2">"FBINT Copa America-16"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Argentina v Chile"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://txodds.com/match-info/29397/argentina-v-chile"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created"</span><span class="p">:</span><span class="mf">1465201480.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_by"</span><span class="p">:</span><span class="s2">"jamespunt"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"moves"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"&lt;h2&gt;&lt;strong&gt;OCI Report&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Market Move on Panama ( 137.75% OCI )&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Reason: &amp;nbsp;QUALITY / TEAM NEWS&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Panama&lt;/strong&gt; are a defensive side and don't concede many goals. And held their won against bigger teams Brazil, Mexico and Uruguay in the last year. They are missing Torres (df 98/8).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Bolivia&lt;/strong&gt; look very poor and have lost 9 of their last 10 games! They are also missing key players and their top scorer. Bolivia without Vaca (gk 14/0), Morales (df 10/0), Cardoza (mf 37/5), Chumacero (mf 31/2), Bejarano (mf 16/0), Pedriel (att 20/3) and Moreno (att 54/14 top scorer).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Panama 1.72 &amp;nbsp;Draw 3.39 &amp;nbsp;Bolivia 5.47&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=\"https://txodds.com/odds+comparison/html?peid=3530853&amp;ot=0\"&gt;https://txodds.com/odds+comparison/html?peid=35308...&lt;/a&gt;&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated"</span><span class="p">:</span><span class="mf">1465202850.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"event_date"</span><span class="p">:</span><span class="mf">1465254000.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"match_link"</span><span class="p">:</span><span class="s2">"https://txodds.com/odds+comparison/html?peid=3530853"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">29398</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"OCI Report for Panama v Bolivia"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"league"</span><span class="p">:</span><span class="s2">"Copa America"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Panama v Bolivia"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://txodds.com/match-info/29398/panama-v-bolivia"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created"</span><span class="p">:</span><span class="mf">1465202850.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_by"</span><span class="p">:</span><span class="s2">"kellyeden"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"news"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"&lt;h2&gt;&lt;strong&gt;Market Information&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;France&lt;/strong&gt;&amp;nbsp;missing Varane (df 29/2), Sakho (df 28/2), Debuchy (df 27/2), Diarra (mf 34/0), Valbuena (mf 52/8), Lacazette (att 10/1), Gameiro (att 8/1) and Benzema (att 81/27 top scorer).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Romania&lt;/strong&gt;&amp;nbsp;are without Papp (df 18/3), Goian (df 59/5), Tamas (df 65/3), Gardos (df 13/0), Maxim (mf 28/2) and Rusescu (att 10/1).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Possible Line-ups:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;France:&lt;/strong&gt; Lloris, Sagna, Rami, Koscielny, Evra, Pogba, Kante, Matuidi, Payet, Griezmann, Giroud.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Romania:&amp;nbsp;&lt;/strong&gt;Tatarusanu, Sapunaru, Chiriches, Grigore, Rat, Pintilii, Hoban, Popa, Stanciu, Stancu, Andone.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Info: &amp;nbsp;&lt;/em&gt;&lt;/strong&gt;France are unbeaten in their last 10 games against Romania (W5, D5). However, four of their last five encounters have ended in draws.&amp;nbsp;Romania's last victory against France was a 2-0 friendly win in Bucharest in April 1972.&amp;nbsp;Romania have kept a clean sheet in 7 of their last 8 matches&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;br&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;France 1.33 &amp;nbsp;Draw 4.81 &amp;nbsp;Romania 10.73&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=\"https://txodds.com/odds+comparison/html?peid=3453592\"&gt;https://txodds.com/odds+comparison/html?peid=34535...&lt;/a&gt;&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated"</span><span class="p">:</span><span class="mf">1465538977.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"event_date"</span><span class="p">:</span><span class="mf">1465585200.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"match_link"</span><span class="p">:</span><span class="s2">"https://txodds.com/odds+comparison/html?peid=3453592"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">29423</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Team News for France v Romania"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"league"</span><span class="p">:</span><span class="s2">"Euro 2016 - Group A"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"France v Romania"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://txodds.com/match-info/29423/france-v-romania"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created"</span><span class="p">:</span><span class="mf">1465538977.0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_by"</span><span class="p">:</span><span class="s2">"kellyeden"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint is used to load all the initial display data for <strong>Match Information</strong>. <em>Previews, OCI Reports, News</em>.</p>
+
+<p>If the user does not have a valid subscription for any of the data then the data objects for those types will be empty.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/initial-data</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>previews</td>
+<td>array</td>
+<td>See <a href="#previews-data">Previews</a> for response object definition.</td>
+</tr>
+<tr>
+<td>moves</td>
+<td>array</td>
+<td>See <a href="#oci-reports-data">OCI Reports</a> for response object definition.</td>
+</tr>
+<tr>
+<td>news</td>
+<td>array</td>
+<td>See <a href="#team-news-data">Team News</a> for response object definition.</td>
+</tr>
+</tbody></table>
+
+<h2 id="previews-data">Previews Data</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=d5be71fe-96dd-4af1-95e3-77e49face214'</span> <span class="se">\</span>
+     https://txodds.com/api/previews
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+   </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"&lt;p&gt;Lionel Messi has just returned to training, training with the ball and there is a chance that he will play against Chile. It is up to Messi himself, according to their coach. Messi has endured back problems and he is tired after some hectic travelling lately.  As the other two teams in this group are Bolivia and Panama this game between the Copa America finalists last time around is not that important. L Biglia will miss this game and N Gaitan is the one likely to replace Messi, if necessary. Over the years it has become quite clear that Messi does not reach the same heights playing for Argentina,  as he does playing for Barcelona.&lt;/p&gt;&lt;p&gt;M Fernandez is injured and he has been replaced by M Gonzalez in the Chilean squad. Key players as always for Chile are of course A Sanchez and A Vidal.&lt;/p&gt;&lt;p&gt;G Higuain, Kun Aguero, Di Maria, yes,  Argentina have some outstanding offensive players in their team even without L Messi and their midfield line is also top class with E Banega, Mascherano and J Pastore likely starters.&lt;/p&gt;&lt;p&gt;I would back the Argentinian win.&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated"</span><span class="p">:</span><span class="mf">1465201480.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"event_date"</span><span class="p">:</span><span class="mf">1465264800.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"match_link"</span><span class="p">:</span><span class="s2">"https://txodds.com/odds+comparison/html?peid=3530854"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">29397</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Preview for Argentina v Chile"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"league"</span><span class="p">:</span><span class="s2">"FBINT Copa America-16"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Argentina v Chile"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://txodds.com/match-info/29397/argentina-v-chile"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="mf">1465201480.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_by"</span><span class="p">:</span><span class="s2">"jamespunt"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint is used to load all event Preview reports. When a user refreshes the previews content list on their app it is recommended that this endpoint be called with the highest received preview identity to receive only new content.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/previews</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+<tr>
+<td>last_event_id</td>
+<td>integer</td>
+<td>false</td>
+<td>If provided only new data created after this identity will be returned.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<p>The response object contains an array of the following data structure:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique identifier for the event preview.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>The title of the preview.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Friendly description for the preview.</td>
+</tr>
+<tr>
+<td>league</td>
+<td>string</td>
+<td>Name of the league for the event. Mostly null.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Web link to the preview on the TXODDS website.</td>
+</tr>
+<tr>
+<td>match_link</td>
+<td>string</td>
+<td>Web link to the event that the preview is written for. Sometimes null.</td>
+</tr>
+<tr>
+<td>event_date</td>
+<td>long</td>
+<td>Epoch date for the event&rsquo;s start time.</td>
+</tr>
+<tr>
+<td>body</td>
+<td>string</td>
+<td>HTML string of the event preview main content.</td>
+</tr>
+<tr>
+<td>created</td>
+<td>long</td>
+<td>Epoch date for when the preview was first created.</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>string</td>
+<td>Name of the preview author.</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>long</td>
+<td>Epoch date for when the preview was last updated.</td>
+</tr>
+</tbody></table>
+
+<h2 id="oci-reports-data">OCI Reports Data</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=d5be71fe-96dd-4af1-95e3-77e49face214'</span> <span class="se">\</span>
+     https://txodds.com/api/moves
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+   </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"&lt;h2&gt;&lt;strong&gt;OCI Report&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Market Move on Panama ( 137.75% OCI )&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Reason: &amp;nbsp;QUALITY / TEAM NEWS&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Panama&lt;/strong&gt; are a defensive side and don't concede many goals. And held their won against bigger teams Brazil, Mexico and Uruguay in the last year. They are missing Torres (df 98/8).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Bolivia&lt;/strong&gt; look very poor and have lost 9 of their last 10 games! They are also missing key players and their top scorer. Bolivia without Vaca (gk 14/0), Morales (df 10/0), Cardoza (mf 37/5), Chumacero (mf 31/2), Bejarano (mf 16/0), Pedriel (att 20/3) and Moreno (att 54/14 top scorer).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Panama 1.72 &amp;nbsp;Draw 3.39 &amp;nbsp;Bolivia 5.47&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=\"https://txodds.com/odds+comparison/html?peid=3530853&amp;ot=0\"&gt;https://txodds.com/odds+comparison/html?peid=35308...&lt;/a&gt;&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated"</span><span class="p">:</span><span class="mf">1465202850.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"event_date"</span><span class="p">:</span><span class="mf">1465254000.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"match_link"</span><span class="p">:</span><span class="s2">"https://txodds.com/odds+comparison/html?peid=3530853"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">29398</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"OCI Report for Panama v Bolivia"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"league"</span><span class="p">:</span><span class="s2">"Copa America"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Panama v Bolivia"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://txodds.com/match-info/29398/panama-v-bolivia"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="mf">1465202850.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_by"</span><span class="p">:</span><span class="s2">"kellyeden"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint is used to load all event OCI Reports reports. When a user refreshes the OCI Reports content list on their app it is recommended that this endpoint be called with the highest received OCI Report identity to receive only new content.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/moves</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+<tr>
+<td>last_event_id</td>
+<td>integer</td>
+<td>false</td>
+<td>If provided only new data created after this identity will be returned.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique identifier for the event OCI Report.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>The title of the OCI Report.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Friendly description for the OCI Report.</td>
+</tr>
+<tr>
+<td>league</td>
+<td>string</td>
+<td>Name of the league for the event.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Web link to the OCI Report on the TXODDS website.</td>
+</tr>
+<tr>
+<td>match_link</td>
+<td>string</td>
+<td>Web link to the event that the OCI Report is written for.</td>
+</tr>
+<tr>
+<td>event_date</td>
+<td>long</td>
+<td>Epoch date for the event&rsquo;s start time.</td>
+</tr>
+<tr>
+<td>body</td>
+<td>string</td>
+<td>HTML string of the event OCI Report main content.</td>
+</tr>
+<tr>
+<td>created</td>
+<td>long</td>
+<td>Epoch date for when the OCI Report was first created.</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>string</td>
+<td>Name of the OCI Report author.</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>long</td>
+<td>Epoch date for when the OCI Report was last updated.</td>
+</tr>
+</tbody></table>
+
+<h2 id="team-news-data">Team News Data</h2>
+<pre class="highlight shell"><code>curl -X POST -d <span class="se">\</span>
+     <span class="s1">'user_token=d5be71fe-96dd-4af1-95e3-77e49face214'</span> <span class="se">\</span>
+     https://txodds.com/api/moves
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+<pre class="highlight plaintext"><code>
+</code></pre>
+<pre class="highlight javascript"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+   </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"&lt;h2&gt;&lt;strong&gt;Market Information&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;France&lt;/strong&gt;&amp;nbsp;missing Varane (df 29/2), Sakho (df 28/2), Debuchy (df 27/2), Diarra (mf 34/0), Valbuena (mf 52/8), Lacazette (att 10/1), Gameiro (att 8/1) and Benzema (att 81/27 top scorer).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Romania&lt;/strong&gt;&amp;nbsp;are without Papp (df 18/3), Goian (df 59/5), Tamas (df 65/3), Gardos (df 13/0), Maxim (mf 28/2) and Rusescu (att 10/1).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Possible Line-ups:&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;France:&lt;/strong&gt; Lloris, Sagna, Rami, Koscielny, Evra, Pogba, Kante, Matuidi, Payet, Griezmann, Giroud.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Romania:&amp;nbsp;&lt;/strong&gt;Tatarusanu, Sapunaru, Chiriches, Grigore, Rat, Pintilii, Hoban, Popa, Stanciu, Stancu, Andone.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;Info: &amp;nbsp;&lt;/em&gt;&lt;/strong&gt;France are unbeaten in their last 10 games against Romania (W5, D5). However, four of their last five encounters have ended in draws.&amp;nbsp;Romania's last victory against France was a 2-0 friendly win in Bucharest in April 1972.&amp;nbsp;Romania have kept a clean sheet in 7 of their last 8 matches&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;&lt;br&gt;&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;France 1.33 &amp;nbsp;Draw 4.81 &amp;nbsp;Romania 10.73&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=\"https://txodds.com/odds+comparison/html?peid=3453592\"&gt;https://txodds.com/odds+comparison/html?peid=34535...&lt;/a&gt;&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated"</span><span class="p">:</span><span class="mf">1465538977.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"event_date"</span><span class="p">:</span><span class="mf">1465585200.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"match_link"</span><span class="p">:</span><span class="s2">"https://txodds.com/odds+comparison/html?peid=3453592"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">29423</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="s2">"Team News for France v Romania"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"league"</span><span class="p">:</span><span class="s2">"Euro 2016 - Group A"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"France v Romania"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://txodds.com/match-info/29423/france-v-romania"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created"</span><span class="p">:</span><span class="mf">1465538977.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_by"</span><span class="p">:</span><span class="s2">"kellyeden"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint is used to load all event Team News Reports reports. When a user refreshes the Team News Reports content list on their app it is recommended that this endpoint be called with the highest received Team News Report identity to receive only new content.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://txodds.com/api/news</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_token</td>
+<td>string</td>
+<td>true</td>
+<td>The user session token.</td>
+</tr>
+<tr>
+<td>last_event_id</td>
+<td>integer</td>
+<td>false</td>
+<td>If provided only new data created after this identity will be returned.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-parameters">Response Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique identifier for the event News Report.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>The title of the News Report.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Friendly description for the News Report.</td>
+</tr>
+<tr>
+<td>league</td>
+<td>string</td>
+<td>Name of the league for the event.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Web link to the News Report on the TXODDS website.</td>
+</tr>
+<tr>
+<td>match_link</td>
+<td>string</td>
+<td>Web link to the event that the News Report is written for.</td>
+</tr>
+<tr>
+<td>event_date</td>
+<td>long</td>
+<td>Epoch date for the event&rsquo;s start time.</td>
+</tr>
+<tr>
+<td>body</td>
+<td>string</td>
+<td>HTML string of the event News Report main content.</td>
+</tr>
+<tr>
+<td>created</td>
+<td>long</td>
+<td>Epoch date for when the News Report was first created.</td>
+</tr>
+<tr>
+<td>created_by</td>
+<td>string</td>
+<td>Name of the News Report author.</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>long</td>
+<td>Epoch date for when the News Report was last updated.</td>
 </tr>
 </tbody></table>
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<p>Included in each response is the following data structure which should contain a friendly error string as well as a unique error code:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"resp_status"</span><span class="p">:{</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"code"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"errors"</span><span class="p">:</span><span class="kc">null</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The TXODDS Mobile API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -290,48 +1483,100 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>0000</td>
+<td>&lsquo;OK&rsquo;</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>0001</td>
+<td>&#39;Invalid session&rsquo;</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>1001</td>
+<td>&#39;Authentication Failed&rsquo;</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>1002</td>
+<td>&#39;Login not provided&rsquo;</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>1003</td>
+<td>&#39;Password not provided&rsquo;</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td>1004</td>
+<td>&#39;Invalid login and password&rsquo;</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td>1005</td>
+<td>&#39;No valid subscriptions&rsquo;</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>1006</td>
+<td>&#39;User token not provided&rsquo;</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>1007</td>
+<td>&#39;Invalid user token&rsquo;</td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>1008</td>
+<td>&#39;Field not provided&rsquo;</td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>1009</td>
+<td>&#39;Invalid device type&rsquo;</td>
+</tr>
+<tr>
+<td>1010</td>
+<td>&#39;Syntax error&rsquo;</td>
+</tr>
+<tr>
+<td>1011</td>
+<td>&#39;Email address not provided&rsquo;</td>
+</tr>
+<tr>
+<td>1012</td>
+<td>&#39;Registration failed&rsquo;</td>
+</tr>
+<tr>
+<td>1013</td>
+<td>&#39;First name not provided&rsquo;</td>
+</tr>
+<tr>
+<td>1014</td>
+<td>&#39;Last name not provided&rsquo;</td>
+</tr>
+<tr>
+<td>1015</td>
+<td>&#39;Login name is not available&rsquo;</td>
+</tr>
+<tr>
+<td>1016</td>
+<td>&#39;Email address is already in use&rsquo;</td>
+</tr>
+<tr>
+<td>1017</td>
+<td>&#39;Unique device Id not provided&rsquo;</td>
+</tr>
+<tr>
+<td>1018</td>
+<td>&#39;Too many registered devices&rsquo;</td>
+</tr>
+<tr>
+<td>1019</td>
+<td>&#39;No profile Id was provided&rsquo;</td>
+</tr>
+<tr>
+<td>1020</td>
+<td>&#39;Invalid profile Id&rsquo;</td>
+</tr>
+<tr>
+<td>1021</td>
+<td>&#39;Device type not provided&rsquo;</td>
+</tr>
+<tr>
+<td>9000</td>
+<td>&#39;Unknown error&rsquo;</td>
 </tr>
 </tbody></table>
 
@@ -339,8 +1584,9 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="java">java</a>
+                <a href="#" data-language-name="ObjectiveC">ObjectiveC</a>
+                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
