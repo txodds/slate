@@ -196,16 +196,23 @@
 </tr>
 </thead><tbody>
 <tr>
+<td>token</td>
+<td>string</td>
+<td>false*</td>
+<td>The user&rsquo;s access token.</td>
+<td></td>
+</tr>
+<tr>
 <td>login</td>
 <td>string</td>
-<td>true</td>
+<td>false*</td>
 <td>The user&rsquo;s unique login name.</td>
 <td></td>
 </tr>
 <tr>
 <td>password</td>
 <td>string</td>
-<td>true</td>
+<td>false*</td>
 <td>The user&rsquo;s password</td>
 <td></td>
 </tr>
@@ -231,6 +238,13 @@
 <td>en, it, zh</td>
 </tr>
 </tbody></table>
+
+<aside class="warning">
+There are two ways to login:<br>
+1) with a login and password<br>
+2) with an user access token<br>
+<b>Note login should be called every time the app starts, from a cold start or from a background resume. If login is successful then subscribe-device should be called each time.</b>
+</aside>
 
 <aside class="notice">
 Remember — a user may only have 2 active registered devices. Do deactivate a device the user must log into their profile on the website https://txodds.com/
