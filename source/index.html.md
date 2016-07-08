@@ -94,11 +94,19 @@ Each user is only permitted to have 2 active registered devices for TXODDS mobil
 
 Parameter | Type | Required | Description | Options
 --------- | ---- | -------- | ----------- | -------
-login | string | true | The user's unique login name. | 
-password | string | true | The user's password |
+token | string | false* | The user's access token. |
+login | string | false* | The user's unique login name. | 
+password | string | false* | The user's password |
 device_id | string | true | The unique device Id that the user is using. |
 device_type | string | true | The device operating system. | android, ios
 language | string | false | The language to choose upon login. | en, it, zh
+
+<aside class="warning">
+There are two ways to login:
+1) with a login and password
+2) with an user access token
+*Note* login should be called every time the app starts, from a cold start or from a background resume. If login is successful then subscribe-device should be called each time.
+</aside>
 
 <aside class="notice">
 Remember — a user may only have 2 active registered devices. Do deactivate a device the user must log into their profile on the website https://txodds.com/
