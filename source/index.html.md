@@ -102,10 +102,10 @@ device_type | string | true | The device operating system. | android, ios
 language | string | false | The language to choose upon login. | en, it, zh
 
 <aside class="warning">
-There are two ways to login:
-1) with a login and password
-2) with an user access token
-*Note* login should be called every time the app starts, from a cold start or from a background resume. If login is successful then subscribe-device should be called each time.
+There are two ways to login:<br>
+1) with a login and password<br>
+2) with an user access token<br>
+<b>Note login should be called every time the app starts, from a cold start or from a background resume. If login is successful then subscribe-device should be called each time.</b>
 </aside>
 
 <aside class="notice">
